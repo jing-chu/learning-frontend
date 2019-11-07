@@ -391,26 +391,22 @@
                     if (moverRight >= document.querySelectorAll(".row div")[6].offsetWidth){
                         clearInterval(timer);
                         timer = setInterval(frameLeft,10);
-                        return;
-                        
+                        return;                        
                     }  else {
                         moverLeft += 10;
                         mover.style.left = moverLeft + "px";
-                        moverRight = moverLeft + mover.offsetWidth;
-                       
+                        moverRight = moverLeft + mover.offsetWidth;                       
                     }  
                 }
                 function frameLeft() {
                      if (moverLeft <= 0){
                         clearInterval(timer);
-                        timer=setInterval(frameRight,10);
-                    
+                        timer=setInterval(frameRight,10);                    
                         return;
                      } else {
                         moverLeft-=3;
                         mover.style.left = moverLeft + "px";
-                        moverRight-=3;
-                
+                        moverRight-=3;                
                     }
                 }
                 
@@ -465,6 +461,7 @@
             let form = document.createElement("form");
             let label1 = document.createElement("label");
             let inputN = document.createElement("input");
+            let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
             inputN.setAttribute("type","text");
             inputN.setAttribute("name","firstname");
             label1.innerHTML = "Enter your first name:";
@@ -473,7 +470,56 @@
             form.appendChild(document.createElement("br"));
             form.appendChild(inputN);
             form.appendChild(document.createElement("br"));
+            inputN.addEventListener("click", addName);
+            function addName(){
+                let lb1 = document.createElement("label");
+                lb1.innerHTML = "A";
+                let input1 = document.createElement("input");
+                input1.setAttribute("type","range");
+                input1.setAttribute("class","points");
+                input1.setAttribute("min","1");
+                input1.setAttribute("max","26");
+                input1.setAttribute("value","1");
+                input1.oninput = function(){
+                    let i = 0;
+                    i = this.value;
+                    lb1.innerHTML = letters[i-1];
+                    inputN.value = letters[i-1];
+                }
+                //console.log(input1.getAttributeNode("value").value);
+                let btn = document.createElement("button");
+                btn.setAttribute("type","button");
+                btn.innerHTML = "Add letter."
+                target.appendChild(btn);
+                form.appendChild(lb1);
+                form.appendChild(input1);
+                form.appendChild(document.createElement("br"));
+                btn.addEventListener("click",addLetter);
+           }
+            function addLetter(){
+                let lb1 = document.createElement("label");                
+                lb1.innerHTML = "A";
+                let input1 = document.createElement("input");
+                input1.setAttribute("type","range");
+                input1.setAttribute("class","points");
+                input1.setAttribute("min",1);
+                input1.setAttribute("max",26);
+                input1.setAttribute("value",1);
+                form.appendChild(lb1);
+                form.appendChild(input1);
+                form.appendChild(document.createElement("br"));
+                input1.oninput = function(){                    
+                    let i = this.value; 
+                    lb1.innerHTML = letters[i-1];        
+                }
+                input1.onchange = function(){                        
+                    inputN.value += lb1.innerHTML;
+                }
 
+            }        
+                    
+             
+           
 
             
         </script>
