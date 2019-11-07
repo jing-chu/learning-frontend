@@ -107,6 +107,33 @@
         </div>
         <script>
             // Write your code here
+            let name = document.getElementById("name");
+            let pizza = document.getElementById("pizza");
+            let size = document.getElementById("size");
+            let remarks = document.getElementById("remarks");
+            let emptyRow = document.getElementById("emptyRow");
+            let pizzaOrders = document.getElementById("pizzaOrders");
+            pizzaOrders.addEventListener("keypress", function (e){
+                if (event.which == 13 ||event.keyCode ==13){
+                    required();
+                }
+            }); 
+            
+            function required(){
+                if(name.value != "" && pizza.value != "" && size.value != ""){
+                    emptyRow.querySelectorAll("td")[0].innerHTML = name.value;
+                    emptyRow.querySelectorAll("td")[1].innerHTML = pizza.value;
+                    emptyRow.querySelectorAll("td")[2].innerHTML = size.value;
+                    emptyRow.querySelectorAll("td")[3].innerHTML = "";
+                    for(i=1;i<=4;i++){                                       
+                        let row = pizzaOrders.insertRow(-1);
+                        let cell = row.insertCell(i-1);
+                        cell.appendChild(document.createElement("input"));
+                        
+                    }
+                }
+                
+            }
 
         </script>
     </div>
@@ -457,69 +484,77 @@
         </div>
         <script>
             // Write your code here
-            let target = document.getElementById("target");
-            let form = document.createElement("form");
-            let label1 = document.createElement("label");
-            let inputN = document.createElement("input");
-            let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-            inputN.setAttribute("type","text");
-            inputN.setAttribute("name","firstname");
-            label1.innerHTML = "Enter your first name:";
-            target.appendChild(form);
-            form.appendChild(label1);
-            form.appendChild(document.createElement("br"));
-            form.appendChild(inputN);
-            form.appendChild(document.createElement("br"));
-            inputN.addEventListener("click", addName);
-            function addName(){
-                let lb1 = document.createElement("label");
-                lb1.innerHTML = "A";
-                let input1 = document.createElement("input");
-                input1.setAttribute("type","range");
-                input1.setAttribute("class","points");
-                input1.setAttribute("min","1");
-                input1.setAttribute("max","26");
-                input1.setAttribute("value","1");
-                input1.oninput = function(){
-                    let i = 0;
-                    i = this.value;
-                    lb1.innerHTML = letters[i-1];
-                    inputN.value = letters[i-1];
-                }
-                //console.log(input1.getAttributeNode("value").value);
-                let btn = document.createElement("button");
-                btn.setAttribute("type","button");
-                btn.innerHTML = "Add letter."
-                target.appendChild(btn);
-                form.appendChild(lb1);
-                form.appendChild(input1);
+            function picture(t){
+                let target = document.getElementById(t);
+                let form = document.createElement("form");
+                let label1 = document.createElement("label");
+                let inputN = document.createElement("input");
+                let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+                inputN.setAttribute("type","text");
+                inputN.setAttribute("name","firstname");
+                label1.innerHTML = "Enter your first name:";
+                target.appendChild(form);
+                form.appendChild(label1);
                 form.appendChild(document.createElement("br"));
-                btn.addEventListener("click",addLetter);
-           }
-            function addLetter(){
-                let lb1 = document.createElement("label");                
-                lb1.innerHTML = "A";
-                let input1 = document.createElement("input");
-                input1.setAttribute("type","range");
-                input1.setAttribute("class","points");
-                input1.setAttribute("min",1);
-                input1.setAttribute("max",26);
-                input1.setAttribute("value",1);
-                form.appendChild(lb1);
-                form.appendChild(input1);
+                form.appendChild(inputN);
                 form.appendChild(document.createElement("br"));
-                input1.oninput = function(){                    
-                    let i = this.value; 
-                    lb1.innerHTML = letters[i-1];        
-                }
-                input1.onchange = function(){                        
-                    inputN.value += lb1.innerHTML;
-                }
+                inputN.addEventListener("click", addName);
+                let flag = true;  
+                function addName(){
+                      
+                    if (flag == true) {
+                        let lb1 = document.createElement("label");
+                        lb1.innerHTML = "A";
+                        let input1 = document.createElement("input");
+                        input1.setAttribute("type","range");
+                        input1.setAttribute("class","points");
+                        input1.setAttribute("min","1");
+                        input1.setAttribute("max","26");
+                        input1.setAttribute("value","1");
+                        input1.oninput = function(){
+                            let i = 0;
+                            i = this.value;
+                            lb1.innerHTML = letters[i-1];
+                            inputN.value = letters[i-1];
+                        }
+                       
+                        let btn = document.createElement("button");
+                        btn.setAttribute("type","button");
+                        btn.innerHTML = "Add letter."
+                        target.appendChild(btn);
+                        form.appendChild(lb1);
+                        form.appendChild(input1);
+                        form.appendChild(document.createElement("br"));
+                        btn.addEventListener("click",addLetter);
+                        flag = false;
+                    } else {
+                        inputN.removeEventListener("click", addName);
+                    }
+                }  
+                function addLetter(){
+                    let lb1 = document.createElement("label");                
+                    lb1.innerHTML = "A";
+                    let input1 = document.createElement("input");
+                    input1.setAttribute("type","range");
+                    input1.setAttribute("class","points");
+                    input1.setAttribute("min",1);
+                    input1.setAttribute("max",26);
+                    input1.setAttribute("value",1);
+                    form.appendChild(lb1);
+                    form.appendChild(input1);
+                    form.appendChild(document.createElement("br"));
+                    input1.oninput = function(){                    
+                        let i = this.value; 
+                        lb1.innerHTML = letters[i-1];        
+                    }
+                    input1.onchange = function(){                        
+                        inputN.value += lb1.innerHTML;
+                    }
 
-            }        
-                    
+                }        
+            }           
              
-           
+        picture("target");  
 
             
         </script>
@@ -538,6 +573,7 @@
         </div>
         <script>
             // You can put at most one line here
+            picture("target2");
         </script>
     </div>
     <!-- END OF Part 8 -->
