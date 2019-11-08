@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
-    <link rel="stylesheet" href="/styling.css">
+    <link rel="stylesheet" href="styling.css">
 
 </head>
 <body class="bg-dark pt-4">
@@ -125,12 +125,17 @@
                     emptyRow.querySelectorAll("td")[1].innerHTML = pizza.value;
                     emptyRow.querySelectorAll("td")[2].innerHTML = size.value;
                     emptyRow.querySelectorAll("td")[3].innerHTML = "";
-                    for(i=1;i<=4;i++){                                       
-                        let row = pizzaOrders.insertRow(-1);
-                        let cell = row.insertCell(i-1);
-                        cell.appendChild(document.createElement("input"));
-                        
-                    }
+                    emptyRow = pizzaOrders.insertRow(-1);
+                    let cell1 = emptyRow.insertCell(0);
+                    let cell2 = emptyRow.insertCell(1);
+                    let cell3 = emptyRow.insertCell(2);
+                    let cell4 = emptyRow.insertCell(3);
+                    cell1.appendChild(document.createElement("input"));
+                    cell2.appendChild(document.createElement("input")); 
+                    cell3.appendChild(document.createElement("input")); 
+                    cell4.appendChild(document.createElement("input"));     
+                } else {
+                    alert("Please provide the \"Name, Pizza and Size\" information ");
                 }
                 
             }
@@ -498,11 +503,8 @@
                 form.appendChild(document.createElement("br"));
                 form.appendChild(inputN);
                 form.appendChild(document.createElement("br"));
-                inputN.addEventListener("click", addName);
-                let flag = true;  
-                function addName(){
-                      
-                    if (flag == true) {
+                inputN.addEventListener("click", addName);  
+                function addName(){                 
                         let lb1 = document.createElement("label");
                         lb1.innerHTML = "A";
                         let input1 = document.createElement("input");
@@ -526,10 +528,10 @@
                         form.appendChild(input1);
                         form.appendChild(document.createElement("br"));
                         btn.addEventListener("click",addLetter);
-                        flag = false;
-                    } else {
+                        
+                    
                         inputN.removeEventListener("click", addName);
-                    }
+                    
                 }  
                 function addLetter(){
                     let lb1 = document.createElement("label");                
